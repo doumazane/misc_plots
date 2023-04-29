@@ -16,10 +16,14 @@
 
 ![UMAP](https://github.com/doumazane/doumazane/blob/main/umapTopics.gif)
 
-Tips:
+💡Tips:
 - generate 
 - generate `GIF` with `PIL` 
-- convert screencast movie into `GIF` with `ffmpeg` ([source and explanations](https://superuser.com/a/1502163)) 
+- convert MOV file to a GIF filter (typically a screencast movie) 👉 [source and explanations](https://superuser.com/a/1502163)) 
 ```bash
-~/programs/ffmpeg -i Integral.mov -filter_complex "[0:v] fps=12,scale=1000:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" Integral.gif
+ffmpeg -i Integral.mov -filter_complex "[0:v] fps=12,scale=1000:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" Integral.gif
+```
+- resize a GIF that's too big 👉 [source and explanations](https://superuser.com/questions/1362352/how-do-i-resize-an-animated-gif-and-keep-transparency)) 
+```bash
+~/programs/ffmpeg -hide_banner -i resampled-top-view_v01.gif -filter_complex "[0:v] scale=320:-1:flags=lanczos,split [a][b]; [a] palettegen=stats_mode=single [p]; [b][p] paletteuse=new=1" resampled-top-view_v02.gif
 ```
